@@ -1,0 +1,33 @@
+<h3>Test Component : Git API - GET Profile Details</h3>
+
+<form #getForm="ngForm" (ngSubmit)="getGitProfile()">
+    Git Profile Name:
+    <input type="text" name="profileName" [(ngModel)]='profileName' placeholder="eg: BalaramaRajuRudraraju" required/>
+    <button type="submit" [disabled]="getForm.invalid">GIT Profile</button>
+</form>
+<div *ngIf="errorText">
+    <p style="color:red;">{{errorText}}</p>
+</div>
+<p>Login : {{user? user.login : ''}}</p>
+<p>Locaiton : {{user ? user.location : ''}}</p>
+<p>Name: {{user ? user.name : ''}}</p>
+
+<hr>
+<h3>Test Component : JSON Place Holder API - Free POST service</h3>
+<form #postForm="ngForm" (ngSubmit)="postDetails()">
+    <div>
+        title:
+        <input name="title" type="text" [(ngModel)]='title' required />
+    </div>
+    <div>
+        body:
+        <input name="body" type="text" [(ngModel)]='body' required />
+    </div>
+    <button type="submit" [disabled]="postForm.invalid">POST Data</button>
+</form>
+
+<div *ngIf="postResonse">
+    <p style="color:green">Submitted Successfully : {{postResonse}}</p>
+</div>
+<div *ngIf="postError">
+    <p style="color:red;">{{postError}}</p>
