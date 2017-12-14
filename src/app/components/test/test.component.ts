@@ -76,3 +76,5 @@ export class TestComponent implements OnInit {
   }
 
 }
+
+// Test comment
