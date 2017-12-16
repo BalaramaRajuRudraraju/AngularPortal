@@ -8,6 +8,11 @@ interface UserResponse {
   name: string;
 }
 
+class Country {
+  name: string;
+  population: string;
+}
+
 interface Post {
   title: string;
   body: string;
@@ -26,6 +31,7 @@ export class TestComponent implements OnInit {
   user: UserResponse;
   profileName: string;
   errorText: string;
+  country: Country;
 
   // POST
   title: string;
@@ -43,10 +49,12 @@ export class TestComponent implements OnInit {
   getGitProfile = (): void => {
     this.user = null;
     this.errorText = '';
-    this.http.get<UserResponse>('https://api.github.com/users/' + this.profileName).subscribe(
+    const  that = this;
+    this.http.get<Country>('https://restcountries.eu/rest/v2/name/india?fullText=true').subscribe(
       (data) => {
-        this.user = data;
+        that.country = data[0];
         console.log(data);
+        console.log(that.country.population);
       },
       (error: HttpErrorResponse) => {
         this.errorText = error.statusText;
@@ -76,5 +84,3 @@ export class TestComponent implements OnInit {
   }
 
 }
-
-// second changes
