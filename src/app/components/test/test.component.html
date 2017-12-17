@@ -1,16 +1,16 @@
-<h3>Test Component : Git API - GET Profile Details</h3>
+<h3>Test Component : I4G API'S - GET Language Details</h3>
 
-<form #getForm="ngForm" (ngSubmit)="getGitProfile()">
+<form #getForm="ngForm" (ngSubmit)="getLanguagesList()">
     Git Profile Name:
     <input type="text" name="profileName" [(ngModel)]='profileName' placeholder="eg: BalaramaRajuRudraraju" required/>
-    <button type="submit" [disabled]="getForm.invalid">GIT Profile</button>
+    <button type="submit" [disabled]="getForm.invalid">Get Lanaguage List</button>
 </form>
 <div *ngIf="errorText">
     <p style="color:red;">{{errorText}}</p>
 </div>
-<p>Login : {{user? user.login : ''}}</p>
+<!-- <p>Login : {{user? user.login : ''}}</p>
 <p>Locaiton : {{user ? user.location : ''}}</p>
-<p>Name: {{user ? user.name : ''}}</p>
+<p>Name: {{user ? user.name : ''}}</p> -->
 
 <hr>
 <h3>Test Component : JSON Place Holder API - Free POST service</h3>

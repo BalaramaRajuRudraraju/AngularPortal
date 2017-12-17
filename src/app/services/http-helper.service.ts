@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
@@ -14,7 +14,19 @@ export class HttpHelperService {
   constructor(private http: HttpClient) { }
 
   getData = (url: string): void => {
-    this.http.get(url).subscribe(
+    const header = this.getBasicAuth();
+    this.http.get(url, { headers: header, observe: 'response' }).subscribe(
+      (responseData) => {
+        console.log(responseData);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error: ' + error);
+      }
+    );
+  }
+
+  postData = (url: string, data: any): void => {
+    this.http.post(url, data, { headers: this.getBasicAuth() }).subscribe(
       (responseData) => {
         console.log(responseData);
       },
@@ -24,15 +36,15 @@ export class HttpHelperService {
     );
   }
 
-  postData = (url: string, data: any): void => {
-    this.http.post(url, data).subscribe(
-      (responseData) => {
-        console.log(responseData);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-      }
-    );
+  getBase64Authentication = (): string => {
+    const userName = 'raju';
+    const password = 'raju';
+    return btoa(userName + ':' + password);
+  }
+
+  getBasicAuth = (): any => {
+    return new HttpHeaders().set('Content-Type', 'application/json')
+      .set('Authorization', 'Basic ' + this.getBase64Authentication());
   }
 
   onFileUpload = (fileUploadEvent: Event, doc: Document) => {
