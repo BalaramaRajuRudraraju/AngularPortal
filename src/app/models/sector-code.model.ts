@@ -1,4 +1,4 @@
 export class SectorCode {
-    code: string;
-    name: string;
+    Code: string;
+    Name: string;
 }

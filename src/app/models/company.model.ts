@@ -9,6 +9,8 @@ export class Company {
     CompanyRegistrationNumber: number;
     CompanyWebsite: string;
     CompanyCurrency: string;
+    CompanyContactPersonFirstName: string;
+    CompanyContactPersonSurname: string;
     BusinessLandlineCode: string;
     BusinessLandlineNumber: string;
     BusinessMobileCode: string;
@@ -17,4 +19,5 @@ export class Company {
     BusinessFaxNumber: string;
     BusinessLocation: string;
     CompanyAttributes: CompanyAttribute[];
+    CompanyDescription: string;
 }

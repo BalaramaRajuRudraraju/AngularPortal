@@ -1,0 +1,66 @@
+<div class="x_panel" id="business-types">
+    <div class="x_title" #panelHeader (click)="loadData()">
+        <h2>
+            <i class="icon-briefcase icons"></i> Business Types</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li>
+                <a class="text-warning" *ngIf="this.sellerInfoMngr.sellerInformation && this.sellerInfoMngr.sellerInformation.selectedIndustriesList
+                && !this.sellerInfoMngr.sellerInformation.selectedIndustriesList.length > 0">
+                    <i class="fa fa-exclamation-triangle fa-lg text-danger"></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-success" *ngIf="this.sellerInfoMngr.sellerInformation && this.sellerInfoMngr.sellerInformation.selectedIndustriesList
+                && this.sellerInfoMngr.sellerInformation.selectedIndustriesList.length > 0">
+                    <i class="fa fa-check-square fa-lg text-success"></i>
+                </a>
+            </li>
+            <li>
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-down fa-lg"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content collapse">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+        <div class="row">
+            <div class="col-md-3 pad0L">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sectors</h3>
+                    </div>
+                    <ul class="list-group sectors">
+                        <a class="list-group-item" *ngFor="let sector of sellerSectorArray" (click)="loadIndustriesForSelectedSector($event, sector.Code, sector.Name, true)">
+                            {{ sector.Name }}</a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 pad0L">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Industries</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="cbList" id="industries">
+                            <li class="cbiItem" *ngFor="let industry of sellerIndustriesBySector">
+                                <input type="checkbox" (change)="updateIndustriesSelection($event, industry.IndustryCode, industry.IndustryName)" [checked]="industry.Selected">
+                                <!-- [checked]="sellerIndustriesBySector.includes(industry.IndustryCode)" -->
+                                <label> {{ industry.IndustryName }} </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                <button type="submit" class="btn btn-primary" (click)="updateBusinessTypes()" [disabled]="selectedIndustriesArray.length === 0">Save</button>
+                <!-- <button class="btn btn-default" type="reset">Edit</button> -->
+                <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

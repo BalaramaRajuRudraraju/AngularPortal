@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="myModalLabel">
+    Session Timeout
+  </h5>
+</div>
+<div class="modal-body">
+  <!-- <h4>{{title}}</h4> -->
+  <p>You're beeing timed out due to inactivity.
+    <br>Please choose to stay signed in or logoff.
+    <br>Otherwise, you will logged off automatically.</p>
+</div>
+<div class="modal-footer">
+  <a href="" class="btn btn-default" (click)="logOff($event)" data-dismiss="modal">Log Off</a>
+  <a href="" class="btn btn-default" (click)="stay($event)" data-dismiss="modal">Stay Logged In ({{timeoutValue}})</a>
+</div>

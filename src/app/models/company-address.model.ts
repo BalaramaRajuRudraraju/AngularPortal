@@ -1,6 +1,6 @@
 export class CompanyAddress {
     CompanyId: number;
-    AddressType: string;
+    AddressType: number;
     AddressLine1: string;
     AddressLine2: string;
     City: string;

@@ -1,0 +1,10 @@
+<div class="modal-header custPopup" [class.success]="title=='Information'" [class.failure]="title=='Error'" [class.verify]="title=='Warn'">
+  <h4 class="modal-title" id="myModalLabel">
+    <i class="icons" [class.icon-check]="title=='Information'" [class.icon-close]="title=='Error'"></i>
+  </h4>
+</div>
+<div class="modal-body text-center">
+  <h4>{{title}}</h4>
+  <p>{{message}}</p>
+  <a href="" class="btn btn-default" (click)="hide($event)" data-dismiss="modal">Close</a>
+</div>

@@ -1,0 +1,114 @@
+<div class="x_panel" id="registration-documents">
+  <div class="x_title" #panelHeader (click)="loadData()">
+    <h2>
+      <i class="icon-docs icons"></i> Company Registration Details</h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li>
+        <a class="text-warning" *ngIf="companyRegistrationForm.invalid && companyInfoModel">
+          <i class="fa fa-exclamation-triangle fa-lg text-danger"></i>
+        </a>
+      </li>
+      <li>
+        <a class="text-success" *ngIf="companyRegistrationForm.valid && companyInfoModel">
+          <i class="fa fa-check-square fa-lg text-success"></i>
+        </a>
+      </li>
+      <li>
+        <a class="collapse-link">
+          <i class="fa fa-chevron-down fa-lg"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="x_content collapse">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <div class="row">
+      <div class="col-md-6">
+        <form class="form-horizontal form-label-left input_mask" [formGroup]="companyRegistrationForm">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration No.</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <div>
+                <div class="col-md-10 pad0L">
+                  <div class="input-group col-md-12">
+                    <input placeholder="" class="form-control" type="text" formControlName="CompanyRegistrationNumber" [tooltip]="getErrorMessage(companyRegistrationForm.controls['CompanyRegistrationNumber'])"
+                      Preconfigured tooltip #regNumberRef="bs-tooltip" data-show-upload="false" data-show-remove="false" pacc>
+                  </div>
+                </div>
+                <div class="col-md-2 pad0L pad0R">
+                  <button type="submit" class="btn btn-primary" (click)="saveRegistrationNumber()" [disabled]="!(companyRegistrationForm.controls['CompanyRegistrationNumber'].dirty && registrationNumberChanged)">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload Documents</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input id="input-company-docs" name="input-b1" type="file" data-show-remove="false" data-show-preview="false" data-show-upload="false"
+                accept=".pdf,.doc,.docx" class="file" (change)="fileUpload($event)" data-show-preview="false" #fileUploadInput
+                data-msg-placeholder="Select *.pdf/*.doc/*.docx files" formControlName="fileUpload">
+            </div>
+          </div>
+          <div class="clear"></div>
+          <!-- <p class="text-muted well well-sm no-shadow" style="margin-top: 20px;">
+            <b>Note:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+            et dolore magna aliqua. Ut enim ad minim veniam, ut aliquip ex ea commodo consequat. </p> -->
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"> Uploaded Documents </div>
+          <ul class="list-group">
+            <ng-container *ngFor="let doc of companyDocs">
+              <li class="list-group-item">
+                <a href="" (click)="downloadCompanyDoc(doc, $event)">{{doc}}</a>
+                <div class="pull-right action-buttons">
+                  <a href="" (click)="deleteDoc(doc, $event)" class="trash text-danger">
+                    <i class="icon-close icons"></i>
+                  </a>
+                </div>
+              </li>
+            </ng-container>
+            <!--             <li class="list-group-item"> Document 002
+              <div class="pull-right action-buttons">
+                <a href="#" class="trash text-danger">
+                  <i class="icon-close icons"></i>
+                </a>
+              </div>
+            </li>
+            <li class="list-group-item"> Document 003
+              <div class="pull-right action-buttons">
+                <a href="#" class="trash text-danger">
+                  <i class="icon-close icons"></i>
+                </a>
+              </div>
+            </li>
+            <li class="list-group-item"> Document 004
+              <div class="pull-right action-buttons">
+                <a href="#" class="trash text-danger">
+                  <i class="icon-close icons"></i>
+                </a>
+              </div>
+            </li>
+            <li class="list-group-item"> Document 005
+              <div class="pull-right action-buttons">
+                <a href="#" class="trash text-danger">
+                  <i class="icon-close icons"></i>
+                </a>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+        <!--         <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-default" type="reset">Edit</button> -->
+        <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

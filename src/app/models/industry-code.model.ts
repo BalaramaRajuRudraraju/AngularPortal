@@ -1,4 +1,6 @@
 export class IndustryCode {
-    code: string;
-    name: string;   
+    SectorCode: number;
+    IndustryCode: number;
+    IndustryName: string;
+    Selected: boolean;
 }

@@ -1,0 +1,145 @@
+<div class="x_panel">
+  <div class="x_title" #panelHeader (click)="loadData()">
+    <h2>
+      <i class="icon-location-pin icons"></i> Address Details</h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li>
+        <a class="text-warning" *ngIf="companyAddresses && companyAddresses.CompanyAddress && companyAddressesForm.invalid">
+          <i class="fa fa-exclamation-triangle fa-lg text-danger"></i>
+        </a>
+      </li>
+      <li>
+        <a class="text-success" *ngIf="companyAddresses && companyAddresses.CompanyAddress && companyAddressesForm.valid">
+          <i class="fa fa-check-square fa-lg text-success"></i>
+        </a>
+      </li>
+      <li>
+        <a class="collapse-link">
+          <i class="fa fa-chevron-down fa-lg"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="x_content collapse">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <form class="form-horizontal form-label-left input_mask" [formGroup]="companyAddressesForm">
+      <div formGroupName="businessLocationAddressForm">
+        <h4>Business Location Address</h4>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Address Line 1</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="Address Line 1" formControlName="addrLine1" #businessLocnAddrLine1Ref="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['businessLocationAddressForm'].get('addrLine1'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Address Line 2</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="Address Line 2" formControlName="addrLine2" #businessLocnAddrLine2Ref="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['businessLocationAddressForm'].get('addrLine2'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="City" class="form-control" type="text" formControlName="city" #businessLocnCityRef="bs-tooltip" [tooltip]="getErrorMessage(companyAddressesForm.controls['businessLocationAddressForm'].get('city'))"
+              Preconfigured tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="State" class="form-control" type="text" formControlName="state" #businessLocnStateRef="bs-tooltip" [tooltip]="getErrorMessage(companyAddressesForm.controls['businessLocationAddressForm'].get('state'))"
+              Preconfigured tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="Country" class="form-control" type="text" formControlName="country" #businessLocnCountryRef="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['businessLocationAddressForm'].get('country'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Postal Code</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="Postal Code" class="form-control" type="text" formControlName="postalCode" #businessLocnPostalCodeRef="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['businessLocationAddressForm'].get('postalCode'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+      </div>
+      <div class="clear mrg20B"></div>
+      <div formGroupName="postBoxAddressForm">
+        <h4>Post Box Address</h4>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="" formControlName="isPhysicalAddrSameAsBusinessLocn" (change)="updatePostBoxAddress()"> Same As Business Location Address </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Address Line 1</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="Address Line 1" formControlName="addrLine1" #postBoxAddrLine1Ref="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['postBoxAddressForm'].get('addrLine1'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Address Line 2</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input type="text" class="form-control" placeholder="Address Line 2" formControlName="addrLine2" #postBoxAddrLine2Ref="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['postBoxAddressForm'].get('addrLine2'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="City" class="form-control" type="text" formControlName="city" #postBoxCityRef="bs-tooltip" [tooltip]="getErrorMessage(companyAddressesForm.controls['postBoxAddressForm'].get('city'))"
+              Preconfigured tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="State" class="form-control" type="text" formControlName="state" #postBoxStateRef="bs-tooltip" [tooltip]="getErrorMessage(companyAddressesForm.controls['postBoxAddressForm'].get('state'))"
+              Preconfigured tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="Country" class="form-control" type="text" formControlName="country" #postBoxCountryRef="bs-tooltip" [tooltip]="getErrorMessage(companyAddressesForm.controls['postBoxAddressForm'].get('country'))"
+              Preconfigured tooltip>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Postal Code</label>
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <input placeholder="Postal Code" class="form-control" type="text" formControlName="postalCode" #postBoxPostalCodeRef="bs-tooltip"
+              [tooltip]="getErrorMessage(companyAddressesForm.controls['postBoxAddressForm'].get('postalCode'))" Preconfigured
+              tooltip>
+          </div>
+        </div>
+      </div>
+      <div class="ln_solid"></div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+          <button type="submit" class="btn btn-primary" [disabled]="companyAddressesForm.invalid || !(companyAddressesForm.dirty && formModified)"
+            (click)="saveAddress()">Save</button>
+          <!-- <button class="btn btn-default" type="reset">Edit</button> -->
+          <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

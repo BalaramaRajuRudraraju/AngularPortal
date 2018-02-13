@@ -1,0 +1,71 @@
+<div class="x_panel" id="contact-information">
+  <div class="x_title" #panelHeader (click)="loadData()">
+    <h2>
+      <i class="icon-phone icons"></i> Company contact information</h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li *ngIf="companyContactInfoForm.invalid && companyInfoModel">
+        <a class="text-warning">
+          <i class="fa fa-exclamation-triangle fa-lg text-danger"></i>
+        </a>
+      </li>
+      <li *ngIf="companyContactInfoForm.valid && companyInfoModel">
+        <a class="text-success">
+          <i class="fa fa-check-square fa-lg text-success"></i>
+        </a>
+      </li>
+      <li>
+        <a class="collapse-link">
+          <i class="fa fa-chevron-down fa-lg"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="x_content collapse">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <br />
+    <form class="form-horizontal form-label-left input_mask" [formGroup]="companyContactInfoForm">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div class="col-md-9 pad0L">
+            <input placeholder="Email" class="form-control" type="text" formControlName="CompanyEmail" [tooltip]="getErrorMessage(companyContactInfoForm.controls['CompanyEmail'])"
+              Preconfigured tooltip #emailRef="bs-tooltip">
+          </div>
+          <div class="col-md-3 pad0L pad0R">
+            <button type="submit" class="btn btn-primary" (click)="companyInfoModel && companyInfoModel.CompanyEmail && !emailChanged  && !emailVerified ? verify('Email'): saveEmail()"
+              [disabled]="!(emailChanged || !emailVerified)">{{companyInfoModel && companyInfoModel.CompanyEmail && !emailChanged && !emailVerified ? 'Verify': 'Save'}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mobile Number</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div>
+            <div class="col-md-3 pad0L">
+              <input placeholder="" class="form-control" type="text" formControlName="BusinessMobileCode" [tooltip]="getErrorMessage(companyContactInfoForm.controls['BusinessMobileCode'])"
+                Preconfigured tooltip #mobileCodeRef="bs-tooltip" [attr.disabled]="companyInfoModel ? companyInfoModel.BusinessMobileCode: false">
+            </div>
+            <div class="col-md-6 pad0L">
+              <div class="input-group">
+                <input placeholder="" class="form-control" type="text" formControlName="BusinessMobileNumber" [tooltip]="getErrorMessage(companyContactInfoForm.controls['BusinessMobileNumber'])"
+                  Preconfigured tooltip #mobileNumberRef="bs-tooltip">
+              </div>
+            </div>
+            <div class="col-md-3 pad0L pad0R">
+              <button type="submit" class="btn btn-primary" (click)=" ((companyInfoModel && companyInfoModel.BusinessMobileCode && companyInfoModel.BusinessMobileNumber) && !mobileNumberChanged && !mobileVerified)
+              ? verify('Mobile'): saveMobileNumber()" [disabled]="!(mobileNumberChanged || !mobileVerified)">{{((companyInfoModel && companyInfoModel.BusinessMobileCode && companyInfoModel.BusinessMobileNumber) && !mobileNumberChanged
+                && !mobileVerified) ? 'Verify': 'Save'}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ln_solid"></div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+          <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

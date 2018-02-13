@@ -1,7 +1,9 @@
+import { Error } from './error.model';
+
 export class Response {
     timestamp: Date;
     status: number;
-    error: string;
+    error: Error;
     message: string;
     path: string;
 }

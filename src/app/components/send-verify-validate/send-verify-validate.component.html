@@ -1,0 +1,63 @@
+<div class="modal-header verify custPopup">
+  <h4 class="modal-title" id="myModalLabel">
+    <i class="icons" [class.icon-screen-smartphone]="verifyContact==='Mobile'" [class.icon-envelope-letter]="verifyContact==='Email'" ></i>
+  </h4>
+  <!--  <h4 class="modal-title pull-left">{{'Verify '+verifyContact}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button> -->
+</div>
+<div class="modal-body text-center">
+  <h4>Check your {{verifyContact}}</h4>
+  <p class="mrg20B">We’ve sent a six-digit confirmation code to
+    <strong>{{ mobile || email }}</strong>. Enter it below to confirm your {{ verifyContact === 'Mobile' ? 'mobile Number' : 'email
+    address' }}.</p>
+  <div class="clear mrg10T">
+    <label class="confirmation_lable">Your confirmation code: </label>
+    <div class="confirmation_code split_input" data-multi-input-code="true">
+      <div class="confirmation_code_group" [formGroup]="verificationCodeForm">
+        <div class="split_input_item input_wrapper">
+          <input type="text" class="inline_input" maxlength="1" formControlName="digit1" #digit1>
+        </div>
+        <div class="split_input_item input_wrapper">
+          <input type="text" class="inline_input" maxlength="1" formControlName="digit2" #digit2>
+        </div>
+        <div class="split_input_item input_wrapper">
+          <input type="text" class="inline_input" maxlength="1" formControlName="digit3" #digit3>
+        </div>
+        <div class="split_input_item input_wrapper">
+          <input type="text" class="inline_input" maxlength="1" formControlName="digit4" #digit4>
+        </div>
+        <div class="split_input_item input_wrapper">
+          <input type="text" class="inline_input" maxlength="1" formControlName="digit5" #digit5>
+        </div>
+        <div class="split_input_item input_wrapper">
+          <input type="text" class="inline_input" maxlength="1" formControlName="digit6" #digit6>
+        </div>
+      </div>
+      <a href="" class="" (click)="sendVerifyCode($event)">Resend code</a>
+    </div>
+    
+  </div>
+  <div *ngIf="failureMessage" class="clear mrg10T" style="color:red"> Technical Error! Please submit the verification code again.</div>
+  <!-- A verification code has been sent your {{verifyContact}}. Please Use the code here to verify {{verifyContact}}. -->
+  <!-- <form class="form-horizontal form-label-left input_mask" [formGroup]="verificationCodeForm">
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="col-md-6 pad0L">
+        <input placeholder="Verification Code" class="form-control" type="text" formControlName="verificationCode">
+      </div>
+      <div class="col-md-3 pad0L">
+        <button type="button" class="btn btn-primary" [disabled]="!verificationCodeForm.controls['verificationCode'].value" (click)="validateCode()">Verify Code</button>
+      </div>
+      <div class="col-md-3 pad0L pad0R">
+        <button type="button" class="btn btn-primary" (click)="sendVerifyCode($event)" >Resend Code</button>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="failureMessage" style="color:red"> Technical Error! Please submit the verification code again.</div>
+  <div *ngIf="successMessage" style="color:green"> Verification code has been sent again.</div> -->
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="verificationCodeForm.invalid" (click)="validateCode()">Verify</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="bsModalRef.hide()">Cancel</button>
+</div>

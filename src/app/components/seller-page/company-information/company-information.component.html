@@ -1,0 +1,138 @@
+<div class="x_panel">
+  <div class="x_title" id="company-information" #panelHeader (click)="loadData()">
+    <h2>
+      <i class="icon-info icons"></i> Company information</h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li *ngIf="companyInfoForm.invalid && companyInfoModel">
+        <a class="text-warning">
+          <i class="fa fa-exclamation-triangle fa-lg text-danger"></i>
+        </a>
+      </li>
+      <li *ngIf="companyInfoForm.valid && companyInfoModel">
+        <a class="text-success">
+          <i class="fa fa-check-square fa-lg text-success"></i>
+        </a>
+      </li>
+      <li>
+        <a class="collapse-link">
+          <i class="fa fa-chevron-up fa-lg"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <br />
+    <form class="form-horizontal form-label-left input_mask" [formGroup]="companyInfoForm">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Name</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" class="form-control" #nameRef="bs-tooltip" placeholder="Company Name" (blur)="showHideErrorToolTips()"
+            formControlName="CompanyName" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyName'])" Preconfigured
+            tooltip>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <textarea class="form-control" rows="3" placeholder="" formControlName="CompanyDescription" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyDescription'])"
+            Preconfigured tooltip #descriptionRef="bs-tooltip"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Person</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div>
+            <div class="col-md-6 pad0L">
+              <input placeholder="First name" class="form-control" type="text" formControlName="CompanyContactPersonFirstName" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyContactPersonFirstName'])"
+                Preconfigured tooltip #contactPersonNameRef="bs-tooltip">
+            </div>
+            <div class="col-md-6 pad0L pad0R">
+              <input placeholder="Last name" class="form-control" type="text" formControlName="CompanyContactPersonSurname" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyContactPersonSurname'])"
+                Preconfigured tooltip #contactPersonSurnameRef="bs-tooltip">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="select2_group form-control" disabled="true" formControlName="BusinessLocation" [tooltip]="getErrorMessage(companyInfoForm.controls['BusinessLocation'])"
+            Preconfigured tooltip #locationRef="bs-tooltip">
+            <optgroup label="Africa">
+              <option value="South Africa">South Africa</option>
+              <option value="NG">Nigeria</option>
+            </optgroup>
+            <optgroup label="Asia">
+              <option value="CA">China</option>
+              <option value="IN">India</option>
+              <option value="MY">Malaysia</option>
+            </optgroup>
+            <optgroup label="Europe">
+              <option value="FR">France</option>
+              <option value="GR">Germany</option>
+              <option value="UK">United Kingdom</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Landline Number</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div>
+            <div class="col-md-4 pad0L">
+              <input placeholder="" class="form-control" type="text" formControlName="BusinessLandlineCode" [tooltip]="getErrorMessage(companyInfoForm.controls['BusinessLandlineCode'])"
+                Preconfigured tooltip #landlindeCodeRef="bs-tooltip">
+            </div>
+            <div class="col-md-8 pad0L pad0R">
+              <input placeholder="" class="form-control" type="text" formControlName="BusinessLandlineNumber" [tooltip]="getErrorMessage(companyInfoForm.controls['BusinessLandlineNumber'])"
+                Preconfigured tooltip #landlineNumberRef="bs-tooltip">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Language</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control" formControlName="CompanyDefaultLanguage" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyDefaultLanguage'])"
+            Preconfigured tooltip #languageRef="bs-tooltip">
+            <option value="">Select from list</option>
+            <option *ngFor="let language of languagesList" [value]="language.LanguageID">{{language.LanguageName}}</option>
+            <!--       <option value="2">Hindi</option>
+            <option value="3">Arabic</option> -->
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Website</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input placeholder="Website" class="form-control" type="text" formControlName="CompanyWebsite" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyWebsite'])"
+            Preconfigured tooltip #websiteRef="bs-tooltip">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">Currency</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control" formControlName="CompanyCurrency" [tooltip]="getErrorMessage(companyInfoForm.controls['CompanyCurrency'])"
+            Preconfigured tooltip #currencyRef="bs-tooltip">
+            <option value="">Select from list</option>
+            <option value="INR">Indian rupee</option>
+            <option value="USD">US dollar</option>
+            <option value="EUR">British pound</option>
+            <option value="ZAR">South African Rand</option>
+          </select>
+        </div>
+      </div>
+      <div class="ln_solid"></div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+          <button type="submit" class="btn btn-primary" [disabled]="!(companyInfoForm.dirty && formChanged && companyInfoForm.valid)"
+            (click)="save()">Save</button>
+          <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,70 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div id="sidebar-main-trigger" (click)="getProfileProgress()" class="profile_progress">
+    <h4>Profile Progress</h4>
+    <!--<span class="chart" data-percent="86"> <span class="percent"></span> </span> -->
+    <div class="chart" [attr.data-percent]="sellerInfoManager.sellerInformation.profileProgressPercentage">{{sellerInfoManager.sellerInformation.profileProgressPercentage}}%</div>
+</div>
+<div class="sidebar main right" id="sidebar-main">
+    <div class="card">
+        <div class="card-header">
+            <i class="icon-compass icon-bg"></i>Profile Progress
+            <div class="card-actions">
+                <a href="" (click)="handleClick(true, '', $event)" class="btn-close quitter">
+                    <i class="icon-close"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body pad0A">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <ul class="list-group medium-icons">
+                <li class="list-group-item">
+                    <a [href]="profileProgress && profileProgress.LocationDetails ? '' : '/my-profile#company-information'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.LocationDetails: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.LocationDetails: false,'company-information', $event)">Location Details
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.LocationDetails: false)"></i>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a [href]="profileProgress && profileProgress.CompleteProfileDetails ? '' : '/my-profile#company-information'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.CompleteProfileDetails: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.LocationDetails: false,'company-information', $event)">Complete Profile Details
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.CompleteProfileDetails: false)"></i>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a [href]="profileProgress && profileProgress.VerifyEmail ? '': '/my-profile#contact-information'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.VerifyEmail: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.VerifyEmail: false,'contact-information', $event)">Verify Email
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.VerifyEmail: false)"></i>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a [href]="profileProgress && profileProgress.VerifyMobile ? '' : '/my-profile#contact-information'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.VerifyMobile: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.VerifyMobile: false,'contact-information', $event)">Verify Mobile
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.VerifyMobile: false)"></i>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a [href]="profileProgress && profileProgress.UploadCompanyDocs ? '' : '/my-profile#registration-documents'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.UploadCompanyDocs: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.UploadCompanyDocs: false,'registration-documents', $event)">Upload Company Docs
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.UploadCompanyDocs : false)"></i>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a [href]="profileProgress && profileProgress.BusinessIndustries ? '' : '/my-profile#business-types'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.BusinessIndustries: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.BusinessIndustries: false,'business-types', $event)">Business Industries
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.BusinessIndustries : false)"></i>
+                    </a>
+                </li>
+                <!-- <li class="list-group-item">
+                    <a routerLink="profileProgress && profileProgress.BusinessIndustries ? '' : '#business-types'" [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.BusinessIndustries: false)"
+                        (click)="handleClick(profileProgress ? profileProgress.BusinessIndustries: false,'business-types', $event)">Business Industries
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.BusinessIndustries : false)"></i>
+                    </a>
+                </li> -->
+                <li class="list-group-item">
+                    <a [ngClass]="applyClasses('anchor', profileProgress ? profileProgress.SelectPackage: false)" (click)="handleClick(profileProgress ? profileProgress.SelectPackage: false,'my-package' ,$event)">Select Pakage
+                        <i class="fa icons" [ngClass]="applyClasses('icon', profileProgress ? profileProgress.SelectPackage : false)"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
